@@ -1,13 +1,38 @@
 {
     ["lib.detect.has_flags"] = {
-        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_cl_external_includedir"] = true,
+        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_-std:c++20"] = true,
         ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_cl_sourceDependencies"] = true,
         ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx__-nologo_-O2"] = true,
-        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_-DNDEBUG"] = true,
-        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_-std:c++20"] = true
+        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_cl_external_includedir"] = true,
+        ["windows_x64_c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.38.33130\\bin\\hostx64\\x64\\cl.exe__cxx_cxflags_-nologo_-DNDEBUG"] = true
     },
-    ["detect.sdks.find_dotnet"] = {
-        dotnet = false
+    find_program_msvc_arch_x64_plat_windows_checktoolcc = {
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]]
+    },
+    find_program = {
+        ["7z"] = [[D:\scoop\apps\xmake\current\winenv\bin\7z]],
+        gzip = false,
+        git = [[D:\scoop\apps\git\current\cmd\git.exe]],
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]],
+        curl = [[D:\scoop\apps\xmake\current\winenv\bin\curl]],
+        zig = false,
+        dotnet = false,
+        nim = false,
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe"] = [[c:\program files\microsoft visual studio\2022\community\vc\tools\msvc\14.38.33130\bin\hostx64\x64\cl.exe]]
+    },
+    find_program_fetch_package_system = {
+        cmake = [[D:\scoop\apps\miniconda3\current\envs\cppflow\Library\bin\cmake.exe]],
+        ninja = [[D:\scoop\apps\miniconda3\current\envs\cppflow\Library\bin\ninja.exe]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolld = {
+        ["link.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]]
+    },
+    find_programver_fetch_package_system = {
+        ["D:\\scoop\\apps\\miniconda3\\current\\envs\\cppflow\\Library\\bin\\ninja.exe"] = "1.13.1",
+        ["D:\\scoop\\apps\\miniconda3\\current\\envs\\cppflow\\Library\\bin\\cmake.exe"] = "4.1.2"
     },
     find_package_windows_x64_fetch_package_xmake = {
         ["xmake::doctest_188f3429bb1e4181b9b1943a88527969_release_2.5.2_external"] = {
@@ -19,36 +44,11 @@
             }
         }
     },
-    find_program_msvc_arch_x64_plat_windows_checktoolld = {
-        ["link.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]]
-    },
-    find_program_fetch_package_system = {
-        cmake = [[D:\scoop\apps\miniconda3\current\envs\cppflow\Library\bin\cmake.exe]],
-        ninja = [[D:\scoop\apps\miniconda3\current\envs\cppflow\Library\bin\ninja.exe]]
-    },
-    find_program = {
-        curl = [[D:\scoop\apps\xmake\current\winenv\bin\curl]],
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe"] = [[c:\program files\microsoft visual studio\2022\community\vc\tools\msvc\14.38.33130\bin\hostx64\x64\cl.exe]],
-        nim = false,
-        zig = false,
-        gzip = false,
-        dotnet = false,
-        ["7z"] = [[D:\scoop\apps\xmake\current\winenv\bin\7z]],
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]],
-        git = [[D:\scoop\apps\git\current\cmd\git.exe]]
-    },
-    find_program_msvc_arch_x64_plat_windows_checktoolcc = {
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]]
+    ["detect.sdks.find_dotnet"] = {
+        dotnet = false
     },
     find_program_fetch_package_xmake = {
         cmake = false,
         ninja = false
-    },
-    find_programver_fetch_package_system = {
-        ["D:\\scoop\\apps\\miniconda3\\current\\envs\\cppflow\\Library\\bin\\ninja.exe"] = "1.13.1",
-        ["D:\\scoop\\apps\\miniconda3\\current\\envs\\cppflow\\Library\\bin\\cmake.exe"] = "4.1.2"
-    },
-    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]]
     }
 }
