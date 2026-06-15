@@ -1,0 +1,16 @@
+[
+{
+  "directory": "D:\\github\\cpp\\netoptim-fast",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MD", "/O2", "/std:c++20", "/I..\\digraphx-fast\\include", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/EHsc", "/W4", "/WX", "/wd5285", "/wd4459", "/wd4267", "/wd4819", "/DNDEBUG", "/Fobuild\\.objs\\test_netoptim_fast\\windows\\x64\\release\\test\\source\\main.cpp.obj", "test\\source\\main.cpp"],
+  "file": "test\\source\\main.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\netoptim-fast",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MD", "/O2", "/std:c++20", "/I..\\digraphx-fast\\include", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/EHsc", "/W4", "/WX", "/wd5285", "/wd4459", "/wd4267", "/wd4819", "/DNDEBUG", "/Fobuild\\.objs\\test_netoptim_fast\\windows\\x64\\release\\test\\source\\test_network_oracle.cpp.obj", "test\\source\\test_network_oracle.cpp"],
+  "file": "test\\source\\test_network_oracle.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\netoptim-fast",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MD", "/O2", "/std:c++20", "/I..\\digraphx-fast\\include", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/EHsc", "/W4", "/WX", "/wd5285", "/wd4459", "/wd4267", "/wd4819", "/DNDEBUG", "/Fobuild\\.objs\\test_netoptim_fast\\windows\\x64\\release\\test\\source\\test_optscaling.cpp.obj", "test\\source\\test_optscaling.cpp"],
+  "file": "test\\source\\test_optscaling.cpp"
+}]
