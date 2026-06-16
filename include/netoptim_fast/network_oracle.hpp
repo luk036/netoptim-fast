@@ -1,3 +1,11 @@
+/**
+ * @file network_oracle.hpp
+ * @brief Separation oracle for parametric network problems (fast version)
+ *
+ * Uses Howard's algorithm for negative cycle detection to assess feasibility
+ * and generate cutting planes for use in ellipsoid or cutting-plane methods.
+ */
+
 #pragma once
 
 #include <optional>
@@ -11,20 +19,12 @@ namespace netoptim_fast {
 
 template <typename T> constexpr auto zeros(const T&) noexcept -> T { return T{}; }
 
-/*!
+/**
  * @brief Separation oracle for parametric network problems
- *
- * Checks feasibility by detecting negative cycles using Howard's algorithm.
+ * @details Checks feasibility by detecting negative cycles using Howard's algorithm.
  * If infeasible, returns a cutting plane (gradient, intercept) for use
  * in ellipsoid or cutting-plane methods.
- *
- * The constraint: u[j] - u[i] <= h(edge, x) for all edges (i,j)
- *
- * @tparam Fn Constraint function with:
- *   - eval(edge_idx, x) -> double (edge weight at point x)
- *   - grad(edge_idx, x) -> Arr (subgradient at point x)
- *   - update(gamma) -> void (optional, for parametric updates)
- */
+ * @tparam Fn Constraint function with eval, grad, and optional update */
 template <typename Fn> class NetworkOracle {
   public:
     using graph_t = digraphx_fast::CSRGraph<double>;
@@ -45,16 +45,12 @@ template <typename Fn> class NetworkOracle {
 
     void update(double gamma) { _fn.update(gamma); }
 
-    /*!
-     * @brief Assess feasibility at point x
-     *
-     * Builds edge weights from Fn::eval at point x, then runs Howard's
+    /** @brief Assess feasibility at point x
+     * @details Builds edge weights from Fn::eval at point x, then runs Howard's
      * algorithm. If a negative cycle is found, computes a cutting plane.
-     *
-     * @tparam Arr Type of gradient vector (e.g., vector<double>, valarray<double>)
-     * @param xval Point to assess
-     * @return Empty if feasible, else (gradient, intercept) pair
-     */
+     * @tparam Arr Type of gradient vector
+     * @param[in] xval Point to assess
+     * @return Empty if feasible, else (gradient, intercept) pair */
     template <typename Arr>
     auto assess_feas(const Arr& xval) -> std::optional<std::pair<Arr, double>> {
         // Build weight vector for current x

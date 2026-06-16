@@ -1,3 +1,11 @@
+/**
+ * @file optscaling_oracle.hpp
+ * @brief Optimal Matrix Scaling oracle (Orlin & Rothblum 1985) — fast version
+ *
+ * Finds diagonal scaling factors minimizing pi/psi via a parametric network
+ * oracle using Howard's algorithm for negative cycle detection.
+ */
+
 #pragma once
 
 #include <algorithm>
@@ -10,27 +18,20 @@
 
 namespace netoptim_fast {
 
-/*!
+/**
  * @brief Optimal Matrix Scaling oracle (Orlin & Rothblum 1985)
- *
- * Finds diagonal scaling factors u_i to minimize pi/psi such that:
- *   psi <= u_i * |a_ij| * u_j^{-1} <= pi  for all a_ij != 0
- *
+ * @details Finds diagonal scaling factors u_i to minimize pi/psi.
  * The oracle converts this to a parametric network problem where
  * each edge (i,j) has cost pair (log|a_ij|, log|a_ji|).
- *
  * @tparam Fn Cost function: (edge_idx) -> pair<double,double> = (a_ij, a_ji)
  */
 template <typename Fn> class OptScalingOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-    /*!
-     * @brief Ratio constraint evaluator
-     *
-     * For each edge, computes min(pi - a_ji, a_ij - psi) where
-     * x = (pi, psi) in log scale.
-     */
+    /** @brief Ratio constraint evaluator
+     * @details For each edge, computes min(pi - a_ji, a_ij - psi) where
+     * x = (pi, psi) in log scale. */
     class Ratio {
         Fn _get_cost;
 
@@ -62,16 +63,12 @@ template <typename Fn> class OptScalingOracle {
                      std::vector<double>& dist, Fn get_cost)
         : _network(graph, dist, Ratio(std::move(get_cost))) {}
 
-    /*!
-     * @brief Assess optimality at point x
-     *
-     * First checks feasibility via the network oracle. If feasible,
+    /** @brief Assess optimality at point x
+     * @details First checks feasibility via the network oracle. If feasible,
      * computes objective s = pi - psi and compares with best-so-far gamma.
-     *
-     * @param x (pi, psi) in log scale
-     * @param gamma best-so-far optimal value (updated if improved)
-     * @return (cut, shrunk) — shrunk=true if gamma was updated
-     */
+     * @param[in] x (pi, psi) in log scale
+     * @param[in,out] gamma best-so-far optimal value (updated if improved)
+     * @return (cut, shrunk) — shrunk=true if gamma was updated */
     auto assess_optim(const Vec& x, double& gamma) -> std::tuple<Cut, bool> {
         auto cut = _network.assess_feas(x);
         if (cut) {
