@@ -48,7 +48,28 @@ template <typename Fn> class NetworkOracle {
     /** @brief Assess feasibility at point x
      * @details Builds edge weights from Fn::eval at point x, then runs Howard's
      * algorithm. If a negative cycle is found, computes a cutting plane.
-     * @tparam Arr Type of gradient vector
+ * @f[
+ *     g = -\sum_{e\in C} \nabla f_e(x), \quad f = -\sum_{e\in C} f_e(x)
+ * @f]
+ *
+ * @dot
+ *   digraph oracle_fast {
+ *     rankdir=LR; bgcolor="transparent";
+ *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+ *     xval [label="Input x", fillcolor="#a9cce3"];
+ *     build [label="Build weights\nw[e] = fn.eval(e, x)"];
+ *     howard [label="Howard's neg\ncycle detection", shape=diamond, fillcolor="#f9e79f"];
+ *     feas [label="Return\nempty", fillcolor="#d5f5e3"];
+ *     cut [label="Compute\n(g, f) from\ncycle", fillcolor="#fadbd8"];
+ *     done [label="Return\n(g, f)", fillcolor="#7fb3d8"];
+ *     xval -> build -> howard;
+ *     howard -> feas [label="feasible", color="#27ae60"];
+ *     howard -> cut [label="infeasible", color="#e74c3c"];
+ *     cut -> done;
+ *   }
+ * @enddot
+ *
+ * @tparam Arr Type of gradient vector
      * @param[in] xval Point to assess
      * @return Empty if feasible, else (gradient, intercept) pair */
     template <typename Arr>
