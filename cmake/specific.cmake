@@ -22,8 +22,8 @@ CPMAddPackage(
   OPTIONS "INSTALL_ONLY YES" # create an installable target
 )
 
-# spdlog must be added before DiGraphXFast to ensure SPDLOG_FMT_EXTERNAL is set,
-# avoiding linker conflicts with fmt when local fmt package is a shared library
+# spdlog must be added before DiGraphXFast to ensure SPDLOG_FMT_EXTERNAL is set, avoiding linker
+# conflicts with fmt when local fmt package is a shared library
 CPMAddPackage(
   NAME spdlog
   GIT_TAG v1.17.0
@@ -37,11 +37,6 @@ CPMAddPackage(
   GITHUB_REPOSITORY luk036/digraphx-fast
 )
 
-set(SPECIFIC_LIBS
-    Threads::Threads
-    fmt::fmt
-    MyWheel::MyWheel
-    Py2Cpp::Py2Cpp
-    spdlog::spdlog
-    DiGraphXFast::DiGraphXFast
+set(SPECIFIC_LIBS Threads::Threads fmt::fmt MyWheel::MyWheel Py2Cpp::Py2Cpp spdlog::spdlog
+                  DiGraphXFast::DiGraphXFast
 )

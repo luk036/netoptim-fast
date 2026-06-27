@@ -41,12 +41,9 @@ file(GLOB_RECURSE headers CONFIGURE_DEPENDS
 add_library(${PROJECT_NAME} INTERFACE)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(${PROJECT_NAME} INTERFACE
-    "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->"
-)
+target_compile_options(${PROJECT_NAME} INTERFACE "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
-# Link dependencies are not needed for header-only library.
-# For unit tests, see test/CMakeLists.txt.
+# Link dependencies are not needed for header-only library. For unit tests, see test/CMakeLists.txt.
 
 target_include_directories(
   ${PROJECT_NAME}

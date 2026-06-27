@@ -1,24 +1,15 @@
 # Distributed under the OSI-approved BSD 3-Clause License.  See accompanying file Copyright.txt or
 # https://cmake.org/licensing for details.
 
-set(script
-    "${CMAKE_CURRENT_LIST_DIR}/doctest.cmake")
-set(prefix
-    "${TEST_PREFIX}")
-set(suffix
-    "${TEST_SUFFIX}")
-set(spec
-    ${TEST_SPEC})
-set(extra_args
-    ${TEST_EXTRA_ARGS})
-set(properties
-    ${TEST_PROPERTIES})
-set(add_labels
-    ${TEST_ADD_LABELS})
-set(junit_output_dir
-    ${TEST_JUNIT_OUTPUT_DIR})
-set(test_list
-    ${TEST_LIST})
+set(script "${CMAKE_CURRENT_LIST_DIR}/doctest.cmake")
+set(prefix "${TEST_PREFIX}")
+set(suffix "${TEST_SUFFIX}")
+set(spec ${TEST_SPEC})
+set(extra_args ${TEST_EXTRA_ARGS})
+set(properties ${TEST_PROPERTIES})
+set(add_labels ${TEST_ADD_LABELS})
+set(junit_output_dir ${TEST_JUNIT_OUTPUT_DIR})
+set(test_list ${TEST_LIST})
 
 if("${CTEST_FILE}" STREQUAL "")
   if(CMAKE_CONFIGURATION_TYPES)
@@ -37,7 +28,10 @@ function(add_command NAME)
       set(_args "${_args} ${_arg}")
     endif()
   endforeach()
-  set(script "${script}add_test(${NAME}${_args})" PARENT_SCOPE)
+  set(script
+      "${script}add_test(${NAME}${_args})"
+      PARENT_SCOPE
+  )
 endfunction()
 
 function(set_command PROP)
@@ -49,7 +43,10 @@ function(set_command PROP)
       set(_args "${_args} ${_arg}")
     endif()
   endforeach()
-  set(script "${script}set_tests_properties(${_args} PROPERTIES ${PROP} ${_args2})" PARENT_SCOPE)
+  set(script
+      "${script}set_tests_properties(${_args} PROPERTIES ${PROP} ${_args2})"
+      PARENT_SCOPE
+  )
 endfunction()
 
 # Run test executable to get list of available tests
@@ -66,12 +63,8 @@ execute_process(
 
 if(NOT ${result} EQUAL 0)
   string(REPLACE "\n" "\n    " output "${output}")
-  message(FATAL_ERROR
-    "Error running test executable.\n"
-    "  Path: '${TEST_EXECUTABLE}'\n"
-    "  Result: '${result}'\n"
-    "  Output:\n"
-    "    ${output}\n"
+  message(FATAL_ERROR "Error running test executable.\n" "  Path: '${TEST_EXECUTABLE}'\n"
+                      "  Result: '${result}'\n" "  Output:\n" "    ${output}\n"
   )
 endif()
 
@@ -79,8 +72,9 @@ endif()
 foreach(line ${output})
   set(test ${line})
   # ... and add to script
-  add_command("${prefix}${test}${suffix}"
-    ${TEST_EXECUTOR} "${TEST_EXECUTOR}" "${TEST_EXECUTABLE}" "${test}" ${extra_args}
+  add_command(
+    "${prefix}${test}${suffix}" ${TEST_EXECUTOR} "${TEST_EXECUTOR}" "${TEST_EXECUTABLE}" "${test}"
+    ${extra_args}
   )
   set_command("${prefix}${test}${suffix}" PROPERTIES ${properties})
 endforeach()

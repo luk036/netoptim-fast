@@ -19,8 +19,8 @@ include(../cmake/specific.cmake)
 CPMAddPackage("gh:doctest/doctest@2.5.2")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 
-# Add the library target if it doesn't already exist (e.g. when built from the root project
-# via add_subdirectory). When built standalone with -Stest or via all/, it needs to be added here.
+# Add the library target if it doesn't already exist (e.g. when built from the root project via
+# add_subdirectory). When built standalone with -Stest or via all/, it needs to be added here.
 if(TEST_INSTALLED_VERSION)
   find_package(NetOptimFast REQUIRED)
 elseif(NOT TARGET NetOptimFast)
@@ -37,13 +37,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 # enable compiler warnings for the test target
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    target_compile_options(
-      ${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Wextra -Werror
-    )
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Wextra -Werror)
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(
-      ${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Wextra -Werror
-    )
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wpedantic -Wextra -Werror)
   elseif(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /utf-8 /W4 /WX)
   endif()

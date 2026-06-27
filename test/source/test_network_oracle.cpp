@@ -1,13 +1,12 @@
 #include <doctest/doctest.h>
 
 #include <cmath>
+#include <digraphx_fast/csr_graph.hpp>
 #include <memory>
+#include <netoptim_fast/network_oracle.hpp>
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#include <digraphx_fast/csr_graph.hpp>
-#include <netoptim_fast/network_oracle.hpp>
 
 using namespace netoptim_fast;
 
@@ -19,8 +18,8 @@ namespace {
 
     struct MockOracle {
         std::shared_ptr<SharedState> state;
-        std::vector<double> values; // indexed by edge_idx
-        std::vector<double> grads;  // indexed by edge_idx
+        std::vector<double> values;  // indexed by edge_idx
+        std::vector<double> grads;   // indexed by edge_idx
 
         MockOracle() : state(std::make_shared<SharedState>()) {}
 
@@ -29,7 +28,7 @@ namespace {
         void update(double gamma) { state->t = gamma; }
     };
 
-} // namespace
+}  // namespace
 
 TEST_CASE("Test NetworkOracle assess_feas no negative cycle") {
     auto builder = digraphx_fast::CSRGraph<double>::Builder(3);
@@ -39,7 +38,7 @@ TEST_CASE("Test NetworkOracle assess_feas no negative cycle") {
     auto graph = builder.build();
 
     MockOracle oracle;
-    oracle.values = {1.0, 1.0, 1.0}; // all positive — no negative cycle
+    oracle.values = {1.0, 1.0, 1.0};  // all positive — no negative cycle
     oracle.grads = {1.0, 1.0, 1.0};
 
     std::vector<double> dist(graph.num_nodes, 0.0);
@@ -58,7 +57,7 @@ TEST_CASE("Test NetworkOracle assess_feas with negative cycle") {
     auto graph = builder.build();
 
     MockOracle oracle;
-    oracle.values = {1.0, 1.0, -3.0}; // 1+1-3 = -1 < 0 → negative cycle
+    oracle.values = {1.0, 1.0, -3.0};  // 1+1-3 = -1 < 0 → negative cycle
     oracle.grads = {1.0, 1.0, -1.0};
 
     std::vector<double> dist(graph.num_nodes, 0.0);
