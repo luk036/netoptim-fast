@@ -55,6 +55,6 @@ add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
 # ---- code coverage ----
 
 if(ENABLE_TEST_COVERAGE)
-  target_compile_options(NetOptimFast PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(NetOptimFast PUBLIC -fprofile-arcs -ftest-coverage)
+  target_compile_options(NetOptimFast INTERFACE -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(NetOptimFast INTERFACE -fprofile-arcs -ftest-coverage)
 endif()
