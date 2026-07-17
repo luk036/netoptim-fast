@@ -72,4 +72,5 @@ packageProject(
 
 # ---- Subdirectories ----
 add_subdirectory(test)
+add_subdirectory(bench)
 add_subdirectory(documentation)
