@@ -56,8 +56,7 @@ int main() {
             if (run == 0) found = cut.has_value();
         }
         double avg = total_ms / n_runs;
-        std::printf("%-12zu %-10zu %-6s %-12.2f\n",
-                    n, g.num_edges, found ? "yes" : "no", avg);
+        std::printf("%-12zu %-10zu %-6s %-12.2f\n", n, g.num_edges, found ? "yes" : "no", avg);
     }
     return 0;
 }
