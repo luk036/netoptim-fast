@@ -14,7 +14,28 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-include(../cmake/specific.cmake)
+
+if(TEST_INSTALLED_VERSION)
+  # All dependencies are installed — use find_package to avoid
+  # CPM re-fetching fmt/spdlog transitively, causing ALIAS conflicts
+  set(THREADS_PREFER_PTHREAD_FLAG ON)
+  find_package(Threads REQUIRED)
+  find_package(fmt REQUIRED)
+  find_package(spdlog REQUIRED)
+  find_package(Py2Cpp REQUIRED)
+  find_package(MyWheel REQUIRED)
+  find_package(DiGraphXFast REQUIRED)
+  set(SPECIFIC_LIBS Threads::Threads fmt::fmt MyWheel::MyWheel Py2Cpp::Py2Cpp spdlog::spdlog
+                    DiGraphXFast::DiGraphXFast
+  )
+  find_package(NetOptimFast REQUIRED)
+else()
+  include(../cmake/specific.cmake)
+
+  if(NOT TARGET NetOptimFast)
+    CPMAddPackage(NAME NetOptimFast SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+  endif()
+endif()
 
 # Try system-installed doctest first (Ubuntu: doctest-dev, macOS: brew install doctest, Termux: doctest)
 find_package(doctest CONFIG QUIET)
@@ -23,14 +44,6 @@ if(NOT doctest_FOUND)
   CPMAddPackage("gh:doctest/doctest@2.5.2")
 endif()
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
-
-# Add the library target if it doesn't already exist (e.g. when built from the root project via
-# add_subdirectory). When built standalone with -Stest or via all/, it needs to be added here.
-if(TEST_INSTALLED_VERSION)
-  find_package(NetOptimFast REQUIRED)
-elseif(NOT TARGET NetOptimFast)
-  CPMAddPackage(NAME NetOptimFast SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
-endif()
 
 # ---- Create binary ----
 
