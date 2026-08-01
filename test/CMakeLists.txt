@@ -16,8 +16,8 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 
 if(TEST_INSTALLED_VERSION)
-  # All dependencies are installed — use find_package to avoid
-  # CPM re-fetching fmt/spdlog transitively, causing ALIAS conflicts
+  # All dependencies are installed — use find_package to avoid CPM re-fetching fmt/spdlog
+  # transitively, causing ALIAS conflicts
   set(THREADS_PREFER_PTHREAD_FLAG ON)
   find_package(Threads REQUIRED)
   find_package(fmt REQUIRED)
@@ -37,7 +37,8 @@ else()
   endif()
 endif()
 
-# Try system-installed doctest first (Ubuntu: doctest-dev, macOS: brew install doctest, Termux: doctest)
+# Try system-installed doctest first (Ubuntu: doctest-dev, macOS: brew install doctest, Termux:
+# doctest)
 find_package(doctest CONFIG QUIET)
 
 if(NOT doctest_FOUND)
