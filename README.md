@@ -27,13 +27,12 @@ Fast specialized separation oracles for network optimization.
 Use the following commands from the project's root directory to run the test suite.
 
 ```bash
-cmake -S. -Bbuild
+cmake -B build
 cmake --build build
-cd build/test
-CTEST_OUTPUT_ON_FAILURE=1 ctest
+ctest --test-dir build --output-on-failure
 ```
 
-To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
+To collect code coverage information, run CMake with the `-DNETOPTIMFAST_ENABLE_COVERAGE=1` option.
 
 ### Run clang-format
 
@@ -41,7 +40,7 @@ Use the following commands from the project's root directory to check and fix C+
 This requires _clang-format_, _cmake-format_ and _pyyaml_ to be installed on the current system.
 
 ```bash
-cmake -S. -Bbuild
+cmake -B build
 
 # view changes
 cmake --build build --target format
@@ -51,6 +50,17 @@ cmake --build build --target fix-format
 ```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for details.
+
+### Build the documentation
+
+```bash
+cmake -B build -DNETOPTIMFAST_BUILD_DOCS=ON
+cmake --build build --target GenerateDocs
+# view the docs
+open build/doxygen/html/index.html
+```
+
+To build the documentation locally, you will need Doxygen and Graphviz installed on your system.
 
 ### Additional tools
 
