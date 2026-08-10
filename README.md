@@ -62,16 +62,7 @@ open build/doxygen/html/index.html
 
 To build the documentation locally, you will need Doxygen and Graphviz installed on your system.
 
-### Additional tools
-
-The test subproject includes the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
-The following are currently supported.
-
-#### Sanitizers
-
-Sanitizers can be enabled by configuring CMake with `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
-
-#### Static Analyzers
+### Static analysis
 
 clang-tidy can be enabled by configuring CMake with `-DNETOPTIMFAST_ENABLE_CLANG_TIDY=ON` and building the `clang-tidy` target.
 It analyzes the public headers using the checks configured in `.clang-tidy`.
@@ -80,7 +71,3 @@ It analyzes the public headers using the checks configured in `.clang-tidy`.
 cmake -B build -DNETOPTIMFAST_ENABLE_CLANG_TIDY=ON
 cmake --build build --target clang-tidy
 ```
-
-#### Ccache
-
-Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
