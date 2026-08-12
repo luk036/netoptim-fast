@@ -1,8 +1,10 @@
-#include <chrono>
+#define ANKERL_NANOBENCH_IMPLEMENT
+#include <nanobench.h>
+
 #include <cstdint>
-#include <cstdio>
 #include <digraphx_fast/csr_graph.hpp>
 #include <netoptim_fast/network_oracle.hpp>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -34,29 +36,32 @@ static auto build_graph(size_t n_nodes, int k = 3) -> CSRGraph<double> {
 }
 
 int main() {
-    std::printf("=== netoptim-fast: NetworkOracle (assess_feas, CSR) ===\n");
-    std::printf("%-12s %-10s %-6s %-12s\n", "Nodes", "Edges", "Cut?", "Avg(ms)");
     const size_t sizes[] = {20000, 50000, 100000, 200000, 500000, 1000000};
-    const int n_runs = 5;
+
     for (auto n : sizes) {
         auto g = build_graph(n);
         MockOracle oracle;
         oracle.values = g.weights;
         std::vector<double> dist(g.num_nodes, 0.0);
         auto network = NetworkOracle(g, dist, oracle);
-        bool found = false;
-        double total_ms = 0.0;
-        for (int run = 0; run < n_runs; ++run) {
+        bool found = network.assess_feas(0.0).has_value();
+        std::printf("n=%-8zu edges=%-9zu cut=%-3s\n", n, g.num_edges, found ? "yes" : "no");
+    }
+
+    ankerl::nanobench::Bench bench;
+    bench.title("netoptim-fast NetworkOracle assess_feas (CSR) sweep")
+        .unit("op")
+        .warmup(1)
+        .epochs(3)
+        .minEpochIterations(3);
+
+    for (auto n : sizes) {
+        auto g = build_graph(n);
+        bench.run("assess_feas n=" + std::to_string(n), [&] {
             std::vector<double> d(g.num_nodes, 0.0);
             NetworkOracle net(g, d, MockOracle{g.weights});
-            auto start = std::chrono::high_resolution_clock::now();
             auto cut = net.assess_feas(0.0);
-            auto end = std::chrono::high_resolution_clock::now();
-            total_ms += std::chrono::duration<double, std::milli>(end - start).count();
-            if (run == 0) found = cut.has_value();
-        }
-        double avg = total_ms / n_runs;
-        std::printf("%-12zu %-10zu %-6s %-12.2f\n", n, g.num_edges, found ? "yes" : "no", avg);
+            ankerl::nanobench::doNotOptimizeAway(cut);
+        });
     }
-    return 0;
 }
