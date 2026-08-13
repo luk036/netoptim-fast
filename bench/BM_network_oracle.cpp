@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <digraphx_fast/csr_graph.hpp>
+#include <fmt/format.h>
 #include <netoptim_fast/network_oracle.hpp>
 #include <string>
 #include <utility>
@@ -45,7 +46,7 @@ int main() {
         std::vector<double> dist(g.num_nodes, 0.0);
         auto network = NetworkOracle(g, dist, oracle);
         bool found = network.assess_feas(0.0).has_value();
-        std::printf("n=%-8zu edges=%-9zu cut=%-3s\n", n, g.num_edges, found ? "yes" : "no");
+        fmt::print("n={:<8} edges={:<9} cut={:<3}\n", n, g.num_edges, found ? "yes" : "no");
     }
 
     ankerl::nanobench::Bench bench;
