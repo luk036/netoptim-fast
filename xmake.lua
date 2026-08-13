@@ -1,5 +1,6 @@
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("doctest", {alias = "doctest"})
+add_requires("fmt", {alias = "fmt"})
 add_requires("nanobench", {alias = "nanobench"})
 set_languages("c++20")
 
@@ -24,4 +25,4 @@ target("BM_network_oracle")
     add_includedirs("../digraphx-fast/include", {public = true})
     add_includedirs("include", {public = true})
     add_files("bench/BM_network_oracle.cpp")
-    add_packages("nanobench")
+    add_packages("nanobench", "fmt")
