@@ -1,9 +1,9 @@
 #define ANKERL_NANOBENCH_IMPLEMENT
+#include <fmt/format.h>
 #include <nanobench.h>
 
 #include <cstdint>
 #include <digraphx_fast/csr_graph.hpp>
-#include <fmt/format.h>
 #include <netoptim_fast/network_oracle.hpp>
 #include <string>
 #include <utility>

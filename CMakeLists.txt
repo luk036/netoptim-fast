@@ -228,7 +228,9 @@ if(NETOPTIMFAST_BUILD_BENCHMARKS)
 
     add_executable(${TARGET_NAME} ${ONE_BENCH_CPP})
     set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${ONE_BENCH_EXEC} CXX_STANDARD 20)
-    target_link_libraries(${TARGET_NAME} PRIVATE nanobench NetOptimFast::NetOptimFast ${SPECIFIC_LIBS})
+    target_link_libraries(
+      ${TARGET_NAME} PRIVATE nanobench NetOptimFast::NetOptimFast ${SPECIFIC_LIBS}
+    )
     target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
     target_enable_warnings(${TARGET_NAME})
     add_test(NAME ${ONE_BENCH_EXEC} COMMAND ${TARGET_NAME})
