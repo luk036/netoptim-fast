@@ -3,14 +3,13 @@
 #include <cmath>
 #include <cstdint>
 #include <digraphx_fast/csr_graph.hpp>
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
+#include <ellalgo/ell.hpp>            // for Ell
 #include <limits>
 #include <netoptim_fast/optscaling_oracle.hpp>
 #include <utility>
 #include <valarray>
 #include <vector>
-
-#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
-#include <ellalgo/ell.hpp>            // for Ell
 
 namespace {
 

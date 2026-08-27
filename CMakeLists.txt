@@ -130,9 +130,9 @@ CPMAddPackage(
   OPTIONS "INSTALL_ONLY YES" "DIGRAPHXFAST_BUILD_TESTS OFF"
 )
 
-# EllAlgo provides the cutting-plane driver (cutting_plane_optim) that drives
-# this repo's oracles (Strategy instances). netoptim-fast oracles use
-# valarray-based cuts compatible with Ell<valarray<double>>.
+# EllAlgo provides the cutting-plane driver (cutting_plane_optim) that drives this repo's oracles
+# (Strategy instances). netoptim-fast oracles use valarray-based cuts compatible with
+# Ell<valarray<double>>.
 CPMAddPackage(
   NAME EllAlgo
   GIT_TAG v1.6.12
@@ -140,8 +140,14 @@ CPMAddPackage(
   OPTIONS "INSTALL_ONLY YES" "ELLALGO_BUILD_TESTS OFF"
 )
 
-set(SPECIFIC_LIBS Threads::Threads fmt::fmt MyWheel::MyWheel Py2Cpp::Py2Cpp spdlog::spdlog
-                  DiGraphXFast::DiGraphXFast EllAlgo::EllAlgo
+set(SPECIFIC_LIBS
+    Threads::Threads
+    fmt::fmt
+    MyWheel::MyWheel
+    Py2Cpp::Py2Cpp
+    spdlog::spdlog
+    DiGraphXFast::DiGraphXFast
+    EllAlgo::EllAlgo
 )
 
 # ellalgo v1.6.9+ compiles spdlog headers in its library but does not link fmt. With
