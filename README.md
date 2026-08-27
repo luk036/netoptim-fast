@@ -20,6 +20,16 @@ Fast specialized separation oracles for network optimization.
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 
+## Architecture note
+
+This repo is **oracle-only**: it provides domain separation oracles
+(`network_oracle.hpp`, `optscaling_oracle.hpp`) that produce cutting planes
+(gradient/intercept pairs) but carries **no cutting-plane driver** (no
+`bsearch`/`cutting_plane` machinery). The driver comes from
+[ellalgo-cpp](https://github.com/luk036/ellalgo-cpp) — the tests drive the
+oracles through `EllAlgo::EllAlgo`'s `cutting_plane_optim` (Strategy pattern:
+the oracles are Strategy instances, the driver is the Context).
+
 ## Usage
 
 ### Build and run test suite

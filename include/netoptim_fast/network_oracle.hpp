@@ -11,12 +11,19 @@
 #include <digraphx_fast/csr_graph.hpp>
 #include <digraphx_fast/neg_cycle.hpp>
 #include <optional>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 namespace netoptim_fast {
 
-    template <typename T> constexpr auto zeros(const T&) noexcept -> T { return T{}; }
+    template <typename T> auto zeros(const T& xval) noexcept -> T {
+        if constexpr (std::is_arithmetic_v<T>) {
+            return T{};
+        } else {
+            return T(xval.size());
+        }
+    }
 
     /**
      * @brief Separation oracle for parametric network problems

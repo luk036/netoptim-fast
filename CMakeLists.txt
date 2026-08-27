@@ -130,9 +130,26 @@ CPMAddPackage(
   OPTIONS "INSTALL_ONLY YES" "DIGRAPHXFAST_BUILD_TESTS OFF"
 )
 
-set(SPECIFIC_LIBS Threads::Threads fmt::fmt MyWheel::MyWheel Py2Cpp::Py2Cpp spdlog::spdlog
-                  DiGraphXFast::DiGraphXFast
+# EllAlgo provides the cutting-plane driver (cutting_plane_optim) that drives
+# this repo's oracles (Strategy instances). netoptim-fast oracles use
+# valarray-based cuts compatible with Ell<valarray<double>>.
+CPMAddPackage(
+  NAME EllAlgo
+  GIT_TAG v1.6.11
+  GITHUB_REPOSITORY luk036/ellalgo-cpp
+  OPTIONS "INSTALL_ONLY YES" "ELLALGO_BUILD_TESTS OFF"
 )
+
+set(SPECIFIC_LIBS Threads::Threads fmt::fmt MyWheel::MyWheel Py2Cpp::Py2Cpp spdlog::spdlog
+                  DiGraphXFast::DiGraphXFast EllAlgo::EllAlgo
+)
+
+# ellalgo v1.6.9+ compiles spdlog headers in its library but does not link fmt. With
+# SPDLOG_FMT_EXTERNAL (set on the shared spdlog above), its logger needs fmt's include dir.
+if(TARGET EllAlgo)
+  get_target_property(FMT_INCLUDE_DIRS fmt::fmt INTERFACE_INCLUDE_DIRECTORIES)
+  target_include_directories(EllAlgo PRIVATE ${FMT_INCLUDE_DIRS})
+endif()
 
 # ---------------------------------------------------------------------------
 # Library target (header-only)
