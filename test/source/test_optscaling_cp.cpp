@@ -1,7 +1,6 @@
 #include <doctest/doctest.h>
 
 #include <cmath>
-#include <cstdint>
 #include <digraphx_fast/csr_graph.hpp>
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
 #include <ellalgo/ell.hpp>            // for Ell

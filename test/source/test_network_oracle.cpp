@@ -1,11 +1,8 @@
 #include <doctest/doctest.h>
 
-#include <cmath>
 #include <digraphx_fast/csr_graph.hpp>
 #include <memory>
 #include <netoptim_fast/network_oracle.hpp>
-#include <unordered_map>
-#include <utility>
 #include <vector>
 
 using namespace netoptim_fast;
