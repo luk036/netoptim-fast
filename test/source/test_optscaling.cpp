@@ -4,6 +4,7 @@
 #include <digraphx_fast/csr_graph.hpp>
 #include <limits>
 #include <netoptim_fast/optscaling_oracle.hpp>
+#include <numbers>
 #include <utility>
 #include <valarray>
 #include <vector>
@@ -21,7 +22,7 @@ TEST_CASE("Test OptScalingOracle assess_optim") {
     // Node 2 -> 0: cost pair (log10, log10)
     // Node 1 -> 2: cost pair (log10, log10)
     // Node 2 -> 1: cost pair (log10, log10)
-    double log10 = std::log(10.0);
+    double log10 = std::numbers::ln10;
     double log22 = std::log(22.0);
     double log125 = std::log(125.0);
 
