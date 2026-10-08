@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 
 project(
   NetOptimFast
-  VERSION 1.0.2
+  VERSION 1.0.3
   LANGUAGES CXX
 )
 
@@ -84,14 +84,14 @@ endif()
 
 CPMAddPackage(
   NAME Py2Cpp
-  GIT_TAG v1.6.4
+  GIT_TAG v1.6.6
   GITHUB_REPOSITORY luk036/py2cpp
   OPTIONS "INSTALL_ONLY YES" "PY2CPP_BUILD_TESTS OFF"
 )
 
 CPMAddPackage(
   NAME MyWheel
-  GIT_TAG v1.1.6
+  GIT_TAG v1.1.7
   GITHUB_REPOSITORY luk036/mywheel-cpp
   OPTIONS "INSTALL_ONLY YES" "MYWHEEL_BUILD_TESTS OFF"
 )
@@ -125,7 +125,7 @@ endif()
 
 CPMAddPackage(
   NAME DiGraphXFast
-  GIT_TAG v1.1.7
+  GIT_TAG v1.1.8
   GITHUB_REPOSITORY luk036/digraphx-fast
   OPTIONS "INSTALL_ONLY YES" "DIGRAPHXFAST_BUILD_TESTS OFF"
 )
@@ -135,7 +135,7 @@ CPMAddPackage(
 # Ell<valarray<double>>.
 CPMAddPackage(
   NAME EllAlgo
-  GIT_TAG v1.6.14
+  GIT_TAG v1.6.15
   GITHUB_REPOSITORY luk036/ellalgo-cpp
   OPTIONS "INSTALL_ONLY YES" "ELLALGO_BUILD_TESTS OFF"
 )
