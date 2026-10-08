@@ -14,9 +14,9 @@ using digraphx_fast::CSRGraph;
 
 struct MockOracle {
     std::vector<double> values;
-    auto eval(size_t e, double) const -> double { return values[e]; }
-    auto grad(size_t, double) const -> double { return 0.0; }
-    void update(double) {}
+    auto eval(size_t e, double /*unused*/) const -> double { return values[e]; }
+    auto grad(size_t /*unused*/, double /*unused*/) const -> double { return 0.0; }
+    void update(double /*unused*/) {}
 };
 
 static auto build_graph(size_t n_nodes, int k = 3) -> CSRGraph<double> {
@@ -24,7 +24,7 @@ static auto build_graph(size_t n_nodes, int k = 3) -> CSRGraph<double> {
     for (size_t i = 0; i < n_nodes; ++i) {
         for (int d = 1; d <= k; ++d) {
             auto j = (i + static_cast<size_t>(d)) % n_nodes;
-            double w = static_cast<double>(((i + 1) * 7 + (j + 1) * 13) % 100 + 1);
+            auto w = static_cast<double>(((i + 1) * 7 + (j + 1) * 13) % 100 + 1);
             builder.add_edge(static_cast<uint32_t>(i), static_cast<uint32_t>(j), w);
         }
     }
