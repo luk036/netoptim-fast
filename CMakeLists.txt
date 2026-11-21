@@ -82,6 +82,20 @@ if(NOT fmt_FOUND)
   )
 endif()
 
+# cxxopts < 3.3 uses uint8_t/intmax_t without including <cstdint>, which no longer compiles with
+# recent libstdc++. Resolve >= 3.3 before the dependencies so their standalone examples reuse this
+# target instead of pulling their own 3.2.1 pin.
+if(NOT TARGET cxxopts::cxxopts)
+  find_package(cxxopts 3.3 CONFIG QUIET)
+  if(NOT cxxopts_FOUND)
+    CPMAddPackage(
+      GITHUB_REPOSITORY jarro2783/cxxopts
+      VERSION 3.3.1
+      OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL NO"
+    )
+  endif()
+endif()
+
 CPMAddPackage(
   NAME Py2Cpp
   GIT_TAG v1.6.7
